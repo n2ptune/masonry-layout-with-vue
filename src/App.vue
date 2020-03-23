@@ -1,28 +1,60 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <image-card-list :images="images" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+const DEFAULT_IMAGES_COUNT = 30
 
 export default {
-  name: 'App',
+  data: () => ({
+    images: []
+  }),
+
   components: {
-    HelloWorld
+    ImageCardList: () => import('@/components/ImageCardList.vue')
+  },
+
+  methods: {
+    /**
+     * @param {number} count
+     */
+    async getRandomImages(count) {
+      try {
+        const { data } = await this.axios.get(
+          process.env.VUE_APP_URL + '/photos/random',
+          {
+            headers: {
+              Authorization: 'Client-ID ' + process.env.VUE_APP_ACCESS_KEY
+            },
+            params: {
+              count
+            }
+          }
+        )
+        // Binding data to this component data
+        this.images = data
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getRandomImagesFromLocal() {
+      try {
+        const { default: localData } = await import('@/assets/test_data.json')
+        this.images = localData
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  },
+
+  async created() {
+    if (process.env.NODE_ENV === 'production') {
+      await this.getRandomImages(DEFAULT_IMAGES_COUNT)
+    } else {
+      await this.getRandomImagesFromLocal()
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
