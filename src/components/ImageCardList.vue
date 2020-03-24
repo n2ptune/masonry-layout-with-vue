@@ -38,10 +38,11 @@ export default {
   margin: 3rem auto;
 }
 .wrapper .cards {
-  max-width: var(--card-container-width);
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 0.3fr 0.3fr;
-  grid-auto-rows: 0;
+  column-gap: 10px;
+  row-gap: 7px;
+  grid-template-columns: repeat(3, 400px);
+  justify-content: center;
+  max-width: var(--card-container-width);
 }
 </style>

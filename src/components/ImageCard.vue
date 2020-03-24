@@ -1,8 +1,11 @@
 <template>
   <div class="card">
-    <img :src="image.urls.small" class="image" />
+    <img :src="image.urls.small" class="image" @load="resizeBlock" />
     <div class="meta">
-      {{ image.id }}
+      <div class="rank">
+        likes {{ image.likes }} download {{ image.downloads }}
+      </div>
+      <div class="line">views {{ image.views }}</div>
     </div>
   </div>
 </template>
@@ -16,30 +19,27 @@ export default {
     }
   },
 
-  created() {
-    console.log(this.image)
+  methods: {
+    resizeBlock() {
+      const el = this.$el
+      const imageHeight = el.children[0].height
+      const metaHeight = el.children[1].clientHeight
+
+      el.style.gridRowEnd = `span ${Math.floor(
+        (imageHeight + metaHeight) / 10
+      )}`
+    }
   },
 
-  mounted() {
-    this.$el.style.gridRowEnd = `span ${Math.floor(
-      (this.$el.children[0].height + this.$el.children[1].clientHeight) / 9
-    )}`
-    // let images = document.querySelectorAll('.card')
-    // for (let i = 0; i < images.length; i++) {
-    //   console.log(images[i])
-    //   images[i].style.gridRowEnd = `span ${Math.floor(
-    //     images[i].children[0].height / 10
-    //   )}`
-    // }
+  created() {
+    console.log(this.image)
   }
 }
 </script>
 
 <style scoped>
 .card {
-  margin: 0.5rem;
-}
-.meta {
+  /* margin: 0.5rem; */
 }
 .image {
   border-radius: 10px;
