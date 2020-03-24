@@ -1,11 +1,12 @@
 <template>
-  <div class="card">
-    <img :src="image.urls.small" class="image" @load="resizeBlock" />
-    <div class="meta">
-      <div class="rank">
-        likes {{ image.likes }} download {{ image.downloads }}
-      </div>
-      <div class="line">views {{ image.views }}</div>
+  <div class="card" :style="{ gridRowEnd: gap, overflow: 'hidden' }">
+    <div class="image" :style="{ width: '100%', overflow: 'hidden' }">
+      <img
+        :src="image.urls.small"
+        class="image"
+        @load="resizeBlock"
+        :style="{ width: '100%' }"
+      />
     </div>
   </div>
 </template>
@@ -19,28 +20,23 @@ export default {
     }
   },
 
+  data: () => ({
+    gap: null
+  }),
+
   methods: {
     resizeBlock() {
       const el = this.$el
-      const imageHeight = el.children[0].height
-      const metaHeight = el.children[1].clientHeight
+      const elHeight = el.children[0].offsetHeight
+      const gap = Math.floor(elHeight / 15)
 
-      el.style.gridRowEnd = `span ${Math.floor(
-        (imageHeight + metaHeight) / 10
-      )}`
+      this.gap = `span ${gap}`
     }
-  },
-
-  created() {
-    console.log(this.image)
   }
 }
 </script>
 
 <style scoped>
-.card {
-  /* margin: 0.5rem; */
-}
 .image {
   border-radius: 10px;
 }
