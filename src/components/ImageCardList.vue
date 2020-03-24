@@ -20,7 +20,9 @@ export default {
       type: Array,
       required: true
     }
-  }
+  },
+
+  mounted() {}
 }
 </script>
 
@@ -32,10 +34,14 @@ export default {
   text-align: center;
   padding: 0 1rem;
 }
-.wrapper div {
+.wrapper > div {
   margin: 3rem auto;
 }
 .wrapper .cards {
   max-width: var(--card-container-width);
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 0.3fr 0.3fr;
+  grid-auto-rows: 0;
 }
 </style>
