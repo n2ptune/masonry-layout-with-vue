@@ -1,6 +1,6 @@
 <template>
-  <div class="card" :style="{ gridRowEnd: gap, overflow: 'hidden' }">
-    <div class="image" :style="{ width: '100%', overflow: 'hidden' }">
+  <div class="card" :style="{ height: tH + 'px', gridRowEnd: gap }">
+    <div class="image">
       <img
         :src="image.urls.small"
         class="image"
@@ -21,15 +21,18 @@ export default {
   },
 
   data: () => ({
-    gap: null
+    gap: null,
+    tH: null
   }),
+
+  created() {
+    this.tH = Math.round(this.image.height / (this.image.width / 400))
+    console.log(this.tH)
+  },
 
   methods: {
     resizeBlock() {
-      const el = this.$el
-      const elHeight = el.children[0].offsetHeight
-      const gap = Math.floor(elHeight / 15)
-
+      const gap = Math.round(this.tH / 10)
       this.gap = `span ${gap}`
     }
   }
@@ -39,5 +42,6 @@ export default {
 <style scoped>
 .image {
   border-radius: 10px;
+  height: inherit;
 }
 </style>
