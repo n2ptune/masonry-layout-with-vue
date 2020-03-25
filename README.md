@@ -1,24 +1,9 @@
-# masonry-layout-with-vue
+# Practice Project (Masonry Layout)
 
-## Project setup
-```
-yarn install
-```
+## Intro
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+The goal of this project is learning masonry layout with css grid system. after that show random image as masonry layout using [Unsplash Developers API](https://unsplash.com/developers) that finally implement on vuejs and deploy to github-pages
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Demo
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[https://n2ptune.github.io/masonry-layout-with-vue/](https://n2ptune.github.io/masonry-layout-with-vue/)
