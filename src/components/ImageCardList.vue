@@ -3,8 +3,11 @@
     <div class="heading">
       <h1>Masonry Layout Design Examples</h1>
     </div>
-    <div class="cards">
+    <div class="cards" v-if="images.length">
       <image-card v-for="image in images" :key="image.id" :image="image" />
+    </div>
+    <div class="cards-loading" v-else>
+      Loading image....
     </div>
   </div>
 </template>
@@ -20,9 +23,7 @@ export default {
       type: Array,
       required: true
     }
-  },
-
-  mounted() {}
+  }
 }
 </script>
 
@@ -44,5 +45,9 @@ export default {
   grid-template-columns: repeat(3, 400px);
   justify-content: center;
   max-width: var(--card-container-width);
+}
+.cards-loading {
+  font-size: 1.25rem;
+  text-align: center;
 }
 </style>

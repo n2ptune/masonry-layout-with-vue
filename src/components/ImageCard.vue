@@ -1,5 +1,13 @@
 <template>
-  <div class="card" :style="{ height: tH + 'px', gridRowEnd: gap }">
+  <div
+    class="card"
+    :style="{
+      height: tH + 'px',
+      gridRowEnd: gap,
+      backgroundColor: 'gray',
+      borderRadius: '10px'
+    }"
+  >
     <div class="image">
       <img
         :src="image.urls.small"
@@ -27,14 +35,12 @@ export default {
 
   created() {
     this.tH = Math.round(this.image.height / (this.image.width / 400))
-    console.log(this.tH)
+    const gap = Math.round(this.tH / 10)
+    this.gap = `span ${gap}`
   },
 
   methods: {
-    resizeBlock() {
-      const gap = Math.round(this.tH / 10)
-      this.gap = `span ${gap}`
-    }
+    resizeBlock() {}
   }
 }
 </script>
